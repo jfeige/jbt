@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/static/js/base64.js"  charset="utf-8" ></script>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet"/>
+    <title>{{.words}} -  第1页 -种子 - 磁力搜索 - BT种子下载 - 磁力链接 - 磁力链</title>
+    <style>
+        .divcss6 a{color:#F00}
+    </style>
+    <style type="text/css">
+
+        .style1 a{color:#F00}
+
+    </style>
+</head>
+<body id="list" >
+<div id="topbar" class="topbox"><ul>
+</ul></div>
+
+<div id="wrapper">
+    <!-- header start -->
+    <div id="header">
+
+        <h1 id="logo"><a href="/" title="返回首页"><img width="135" height="30" alt="磁力搜索" src="/static/img/logo_small.png"/></a></h1>
+
+        <div id="sbox">
+
+            <form name="btform" onsubmit="return search(this);" action="/">
+                <input type="text"  baiduSug="2" autocomplete="off" id="input" name="name" placeholder="请输入电影、音乐、软件等资源名称" class="stbox" value="{{.words}}" />
+
+                <input type="submit"  onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
+
+            </form>
+        </div>
+
+
+    </div>
+    <!-- header end -->
+
+    <!-- container start -->
+    <div id="container">
+
+        <div class="leftconbox">
+
+            <ul class="sidenav1">
+            </ul>
+        </div>
+        <div class="sele">
+            <a href="/list/%E5%BB%BA%E5%9B%BD%E5%A4%A7%E4%B8%9A/1/time_d" class="desc">创建时间</a>
+            <a href="/list/%E5%BB%BA%E5%9B%BD%E5%A4%A7%E4%B8%9A/1/size_d">文件大小</a>
+        </div>
+        <div class="main">
+
+            <div class="rststat">找到约 92 条 <strong>磁力链接</strong> 资源 </div>
+
+            <ul class="mlist">
+                {{range .recordList}}
+                    <li>
+                        <div class="T1"> <a name='file_title' target="_blank" href="/hash/{{.Code}}">{{.Title}}</a></div>
+                        <dl class="BotInfo">
+                            <dt>大小:<span> {{.Size}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                文件数:<span> {{.Count}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                创建日期:<span> {{.Time}} </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                访问热度:<span> {{.Hot}} </span>
+                            </dt>
+                        </dl>
+                        <div class="dInfo">
+                            <a href="{{.Murl}}">[磁力链接] </a>
+                            <a href="{{.Turl}}">[迅雷链接]</a>
+                            请使用迅雷，QQ旋风，百度云盘离线，115网盘离线等进行下载
+                        </div>
+
+                    </li>
+                {{end}}
+
+            </ul>    <div id="mpages">
+            <div class="pg">
+                <ul class="pg">
+                    {{if gt .prev 0}}
+                        <a class="flag_pg" href="/list/{{.words}}/time_d/{{.prev}}">上一页</a>
+                    {{else}}
+                        <span class="current">上一页</span>
+                    {{end}}
+
+                    <span class="current">{{.page}}</span>
+                    {{if gt .next 0}}
+                        <a class="flag_pg" href="/list/{{.words}}/time_d/{{.next}}">下一页</a>
+                    {{else}}
+                        <span class="current">下一页</span>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="footer">
+    <p>&copy; 2014 BtSou | <a  href=" /" >磁力搜索</a> | <a  href=" /" >种子搜索网站</a> | <a  href=" /" >btsou</a></p>
+</div>
+
+
+</body>
+<script language="JavaScript">
+    function search(form) {
+        value = form.name.value;
+        if(!value){
+            $('.stbox').focus();
+            return false;
+        }
+        var url = '/list/' + encodeURIComponent(value) + '/time_d/1';
+        window.location = url;
+        return false;
+    }
+</script>
+</html>
