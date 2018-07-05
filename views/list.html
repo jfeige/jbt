@@ -56,19 +56,19 @@
             <div class="rststat">以下资源均来源于DHT网络和BT种子搜索分享站</div>
 
             <ul class="mlist">
-                {{range .recordList}}
+                {{range _,$v := .recordList}}
                     <li>
-                        <div class="T1"> <a name='file_title' target="_blank" href="/hash/{{.Code}}">{{.Title}}</a></div>
+                        <div class="T1"> <a name='file_title' target="_blank" href="/hash/{{$v.Code}}">{{$v.Title}}</a></div>
                         <dl class="BotInfo">
-                            <dt>大小:<span> {{.Size}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                文件数:<span> {{.Count}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                创建日期:<span> {{.Time}} </span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                访问热度:<span> {{.Hot}} </span>
+                            <dt>大小:<span> {{$v.Size}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                文件数:<span> {{$v.Count}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                创建日期:<span> {{$v.Time}} </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                访问热度:<span> {{$v.Hot}} </span>
                             </dt>
                         </dl>
                         <div class="dInfo">
-                            <a href="{{.Murl}}">[磁力链接] </a>
-                            <a href="{{.Turl}}">[迅雷链接]</a>
+                            <a href="{{$v.GetMurl}}">[磁力链接] </a>
+                            <a href="{{$v.GetMurl}}">[迅雷链接]</a>
                             请使用迅雷，QQ旋风，百度云盘离线，115网盘离线等进行下载
                         </div>
 
