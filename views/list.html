@@ -56,7 +56,7 @@
             <div class="rststat">以下资源均来源于DHT网络和BT种子搜索分享站</div>
 
             <ul class="mlist">
-                {{range _,$v := .recordList}}
+                {{range $k,$v := .recordList}}
                     <li>
                         <div class="T1"> <a name='file_title' target="_blank" href="/hash/{{$v.Code}}">{{$v.Title}}</a></div>
                         <dl class="BotInfo">
