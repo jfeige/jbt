@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38f53839-efc3-45f2-a941-e84847edc205" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/views/info.html" afterPath="$PROJECT_DIR$/views/info.html" />
-      <change beforePath="$PROJECT_DIR$/views/list.html" afterPath="$PROJECT_DIR$/views/list.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/models/search.go" afterPath="$PROJECT_DIR$/models/search.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,18 +14,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="jbt.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jbt.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="61" column="36" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
-              <folding>
-                <element signature="e#14#165#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="search.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/search.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -50,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/list.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="321">
-              <caret line="100" column="96" lean-forward="false" selection-start-line="100" selection-start-column="96" selection-end-line="100" selection-end-column="96" />
+              <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
               <folding>
                 <element signature="e#2221#2227#0#HTML" expanded="true" />
                 <element signature="e#2227#2233#0#HTML" expanded="true" />
@@ -73,12 +61,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="search.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/search.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="29" />
-              <folding />
+            <state relative-caret-position="397">
+              <caret line="137" column="21" lean-forward="false" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
+              <folding>
+                <element signature="e#16#224#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -172,13 +162,13 @@
         <option value="$PROJECT_DIR$/views/index.html" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/controllers/search.go" />
-        <option value="$PROJECT_DIR$/models/search.go" />
         <option value="$PROJECT_DIR$/models/object.go" />
         <option value="$PROJECT_DIR$/conf/jbt.ini" />
         <option value="$PROJECT_DIR$/conf/jbt-log.xml" />
         <option value="$PROJECT_DIR$/env.sh" />
         <option value="$PROJECT_DIR$/views/info.html" />
         <option value="$PROJECT_DIR$/views/list.html" />
+        <option value="$PROJECT_DIR$/models/search.go" />
       </list>
     </option>
   </component>
@@ -528,14 +518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/search.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -554,10 +536,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
-          <caret line="100" column="96" lean-forward="false" selection-start-line="100" selection-start-column="96" selection-end-line="100" selection-end-column="96" />
+          <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
           <folding>
             <element signature="e#2221#2227#0#HTML" expanded="true" />
             <element signature="e#2227#2233#0#HTML" expanded="true" />
@@ -571,6 +561,16 @@
             <element signature="e#2400#2406#0#HTML" expanded="true" />
             <element signature="e#2406#2412#0#HTML" expanded="true" />
             <element signature="e#2412#2418#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/search.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="137" column="21" lean-forward="false" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
+          <folding>
+            <element signature="e#16#224#0" expanded="true" />
           </folding>
         </state>
       </provider>

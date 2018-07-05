@@ -117,6 +117,27 @@ func SearchContent(key,tp,url string,page int){
 
 	selection := doc.Find("dl p")
 	fmt.Println("----------",selection.Eq(0).Text())
+	if selection.Eq(0).Text() == ""{
+		return
+	}
+	if selection.Eq(1).Text() == ""{
+		return
+	}
+	if selection.Eq(2).Text() == ""{
+		return
+	}
+	if selection.Eq(3).Text() == ""{
+		return
+	}
+	if selection.Eq(4).Text() == ""{
+		return
+	}
+	if selection.Eq(5).Text() == ""{
+		return
+	}
+	if selection.Eq(6).Text() == ""{
+		return
+	}
 	file_size := strings.Split(selection.Eq(0).Text(),"：")[1]
 	file_count := strings.Split(selection.Eq(1).Text(),"：")[1]
 	create_time := strings.Split(selection.Eq(2).Text(),"：")[1]
