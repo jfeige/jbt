@@ -91,8 +91,8 @@ color: #fff;
 }*/
 .sele a:link      {color: #0062C3; text-decoration:none;}
 .sele a:visited   {color: #0062C3; text-decoration:none;}
-.sele a.desc {background: url(/static/image/arrow.png) 100% 50% no-repeat;font-weight:bold;border-bottom:2px solid #38f;}
-.sele a.asc {background: url(/static/image/arrow2.png) 100% 50% no-repeat; font-weight:bold;border-bottom:2px solid #38f;}
+.sele a.desc {background: url(/static/img/arrow.png) 100% 50% no-repeat;font-weight:bold;border-bottom:2px solid #38f;}
+.sele a.asc {background: url(/static/img/arrow2.png) 100% 50% no-repeat; font-weight:bold;border-bottom:2px solid #38f;}
 /*
 .sele a.desc {color: #0C6; }
 .sele a.asc {color: #0C6; }:

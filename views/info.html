@@ -17,9 +17,9 @@
     <div id="header">
         <h1 id="logo"><a href="/" title="返回首页-种子搜索"><img width="135" height="30" alt="BtSou-种子搜索-磁力搜索" src="/static/img/logo_small.png"/></a></h1>
         <div id="sbox">
-            <form action="/" onsubmit="return mysubmit(this);">
+            <form action="/" onsubmit="return search(this);">
                 <input type="text" baiduSug="2" autocomplete="off" id="input" name="name" placeholder="请输入电影、音乐、软件等资源名称" class="stbox"/>
-                <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="磁力搜索" id="sbutton"/>
+                <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
             </form>
         </div>
     </div>
@@ -44,7 +44,10 @@
         <div class="rightadbox" style="">
             <h4>相关搜索</h4>
             <div class="hotkbox">
-                <a alt="=- 磁力搜索" href="/list/%3D-/1"  target="_blank">=-</a><a alt="English 磁力搜索" href="/list/English/1"  target="_blank">English</a><a alt="STAR 磁力搜索" href="/list/STAR/1"  target="_blank">STAR</a><a alt="Legendary 磁力搜索" href="/list/Legendary/1"  target="_blank">Legendary</a><a alt="Exclusive 磁力搜索" href="/list/Exclusive/1"  target="_blank">Exclusive</a><a alt="DD 磁力搜索" href="/list/DD/1"  target="_blank">DD</a><a alt="720p 磁力搜索" href="/list/720p/1"  target="_blank">720p</a><a alt="- 磁力搜索" href="/list/-/1"  target="_blank">-</a><a alt="1 磁力搜索" href="/list/1/1"  target="_blank">1</a><a alt="0 磁力搜索" href="/list/0/1"  target="_blank">0</a><a alt="2 磁力搜索" href="/list/2/1"  target="_blank">2</a><a alt="5 磁力搜索" href="/list/5/1"  target="_blank">5</a><a alt="Hindi 磁力搜索" href="/list/Hindi/1"  target="_blank">Hindi</a><a alt="Dual 磁力搜索" href="/list/Dual/1"  target="_blank">Dual</a><a alt="BluRay 磁力搜索" href="/list/BluRay/1"  target="_blank">BluRay</a><a alt="x264 磁力搜索" href="/list/x264/1"  target="_blank">x264</a><a alt="-= 磁力搜索" href="/list/-%3D/1"  target="_blank">-=</a><a alt="Audio 磁力搜索" href="/list/Audio/1"  target="_blank">Audio</a><a alt="Dr 磁力搜索" href="/list/Dr/1"  target="_blank">Dr</a><a alt="By 磁力搜索" href="/list/By/1"  target="_blank">By</a><a alt="2013 磁力搜索" href="/list/2013/1"  target="_blank">2013</a></div>
+                {{range $k,$v := .justWords}}
+                    <a alt="={{$v}} 磁力搜索" href="/list/{{$v}}/time_d/1"  target="_blank">{{$v}}</a>
+                {{end}}
+            </div>
         </div>
     </div>
 </div>
@@ -54,9 +57,19 @@
 </div>
 <!-- footer end -->
 
-
-
-
 </body>
+
+<script language="JavaScript">
+    function search(form) {
+        value = form.name.value;
+        if(!value){
+            $('.stbox').focus();
+            return false;
+        }
+        var url = '/list/' + encodeURIComponent(value) + '/time_d/1';
+        window.location = url;
+        return false;
+    }
+</script>
 
 </html>

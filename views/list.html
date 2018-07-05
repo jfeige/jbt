@@ -2,10 +2,9 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/static/js/base64.js"  charset="utf-8" ></script>
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link href="/static/css/style.css" type="text/css" rel="stylesheet"/>
-    <title>{{.words}} -  第1页 -种子 - 磁力搜索 - BT种子下载 - 磁力链接 - 磁力链</title>
+    <title>{{.words}} -  第{{.page}}页 -种子 - 磁力搜索 - BT种子下载 - 磁力链接 - 磁力链</title>
     <style>
         .divcss6 a{color:#F00}
     </style>
@@ -48,12 +47,13 @@
             </ul>
         </div>
         <div class="sele">
-            <a href="/list/%E5%BB%BA%E5%9B%BD%E5%A4%A7%E4%B8%9A/1/time_d" class="desc">创建时间</a>
-            <a href="/list/%E5%BB%BA%E5%9B%BD%E5%A4%A7%E4%B8%9A/1/size_d">文件大小</a>
+            <a href="/list/{{.words}}/time_d/1" {{if eq .tp "time_d"}}class="desc"{{end}}>创建时间</a>
+            <a href="/list/{{.words}}/size_d/1" {{if eq .tp "size_d"}}class="desc"{{end}}>文件大小</a>
+            <a href="/list/{{.words}}/hot_d/1" {{if eq .tp "hot_d"}}class="desc"{{end}}>访问热度</a>
         </div>
         <div class="main">
 
-            <div class="rststat">找到约 92 条 <strong>磁力链接</strong> 资源 </div>
+            <div class="rststat">以下资源均来源于DHT网络和BT种子搜索分享站</div>
 
             <ul class="mlist">
                 {{range .recordList}}
@@ -79,14 +79,14 @@
             <div class="pg">
                 <ul class="pg">
                     {{if gt .prev 0}}
-                        <a class="flag_pg" href="/list/{{.words}}/time_d/{{.prev}}">上一页</a>
+                        <a class="flag_pg" href="/list/{{.words}}/{{.tp}}/{{.prev}}">上一页</a>
                     {{else}}
                         <span class="current">上一页</span>
                     {{end}}
 
                     <span class="current">{{.page}}</span>
                     {{if gt .next 0}}
-                        <a class="flag_pg" href="/list/{{.words}}/time_d/{{.next}}">下一页</a>
+                        <a class="flag_pg" href="/list/{{.words}}/{{.tp}}/{{.next}}">下一页</a>
                     {{else}}
                         <span class="current">下一页</span>
                     {{end}}

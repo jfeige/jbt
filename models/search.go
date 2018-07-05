@@ -9,6 +9,8 @@ import (
 	"strings"
 	"sync"
 	"strconv"
+	"time"
+	"fmt"
 )
 var(
 	 wg sync.WaitGroup
@@ -42,7 +44,7 @@ func Search(words,tp string,page,offset,pagesize int)[]*Record{
 		result,err = redis.Strings(rcon.Do("ZREVRANGE",key,offset,(offset + pagesize-1)))
 	}
 	for _,record := range result{
-		datas := strings.Split(record,"|")
+		datas := strings.Split(record,"&*&")
 		file_title := datas[0]
 		file_size := datas[1]
 		file_count := datas[2]
@@ -81,14 +83,12 @@ func Search(words,tp string,page,offset,pagesize int)[]*Record{
 	从网络查询数据
  */
 func SearchFromNetWork(key,tp,words string,page int){
-
 	var url = "http://www.btsou8.net/list/" + words + "/" +strconv.Itoa(page)+ "/" + tp
 	doc,err := goquery.NewDocument(url)
 	if err != nil{
 		log.Error("SearchFromNetWork has error:%v",err)
 		return
 	}
-
 	doc.Find(".T1").Each(func(i int, selection *goquery.Selection) {
 		url,_ := selection.Find("[name=file_title]").Attr("href")
 		if url != ""{
@@ -98,6 +98,7 @@ func SearchFromNetWork(key,tp,words string,page int){
 		}
 	})
 	wg.Wait()
+
 }
 
 /**
@@ -112,10 +113,10 @@ func SearchContent(key,tp,url string,page int){
 		log.Error("SearchContent has error:%v",err)
 		return
 	}
-
 	title := doc.Find(".T2").Text()
 
 	selection := doc.Find("dl p")
+	fmt.Println("----------",selection.Eq(0).Text())
 	file_size := strings.Split(selection.Eq(0).Text(),"：")[1]
 	file_count := strings.Split(selection.Eq(1).Text(),"：")[1]
 	create_time := strings.Split(selection.Eq(2).Text(),"：")[1]
@@ -125,7 +126,7 @@ func SearchContent(key,tp,url string,page int){
 
 	//创建时间   文件大小
 
-	data = title + "|" + file_size + "|" + file_count + "|" + create_time + "|" + file_hot + "|" + magnet_url + "|" + thunder_url
+	data = title + "&*&" + file_size + "&*&" + file_count + "&*&" + create_time + "&*&" + file_hot + "&*&" + magnet_url + "&*&" + thunder_url
 
 	filters := []string{"txt","TXT","url","</a>","mht","html"}
 
@@ -152,34 +153,37 @@ func SearchContent(key,tp,url string,page int){
 	})
 	files_ret = strings.Join(fs,"&&")
 	files_ret = strings.Replace(files_ret,":"," ",-1)
-	data = data + "|" + files_ret
-	var score string
+	data = data + "&*&" + files_ret
+	var score float64
 	if tp == "time_d"{
 		//创建时间
-		score = strings.Replace(create_time,"-","",-1)
-	}else{
-		values := strings.Split(file_size," ")
+		ctime := strings.Replace(create_time,"-","",-1)
+		score,_ = strconv.ParseFloat(ctime,64)
+	}else if tp == "size_d"{
+		values := strings.Split(file_size," ")
 		//文件大小
 		if len(values) == 2{
 			size,_ := strconv.ParseFloat(values[0],64)
-
 			if values[1] == "MB"{
-				score = strconv.FormatFloat(size * 1000000,'f',-1,64)
+				score = size * 1000000
 			}else if values[1] == "GB"{
-				score = strconv.FormatFloat(size * 1000000000,'f',-1,64)
-			}else if values[1] == "KB"{
-				score = strconv.FormatFloat(size * 1000,'f',-1,64)
+				score = size * 1000000000
+			}else if values[1] == "KB" {
+				score = size*1000
+			}else if values[1] == "字节"{
+				score = size
 			}else{
 				return
 			}
 		}else{
 			return
 		}
+	}else{
+		score,_ = strconv.ParseFloat(file_hot,64)
 	}
-
 	rcon := conn.pool.Get()
 	defer rcon.Close()
-	rcon.Do("ZADD",key,score,data)
+	_,err = rcon.Do("ZADD",key,score,data)
 }
 
 /**
@@ -203,8 +207,18 @@ func countSearch(words string){
 	rcon := conn.pool.Get()
 	defer rcon.Close()
 
+	//热门搜索关键词
 	key := "hotWords"
 	rcon.Do("zincrby",key,1,words)
+
+
+	//最近搜索关键词
+	key = "justWords"
+	rcon.Do("ZADD",key,time.Now().UnixNano()/1e6,words)
+	cnt,_ := redis.Int(rcon.Do("ZCARD",key))
+	if cnt > 20{
+		rcon.Do("zremrangebyrank",key,0,0)
+	}
 }
 
 /**
@@ -216,6 +230,19 @@ func GetHotSearch()[]string{
 
 	key := "hotWords"
 	words,_ := redis.Strings(rcon.Do("zrevrange",key,0,7))
+
+	return words
+}
+
+/**
+	获取最近搜索前20的关键词
+ */
+func GetJustSearch()[]string{
+	rcon := conn.pool.Get()
+	defer rcon.Close()
+
+	key := "justWords"
+	words,_ := redis.Strings(rcon.Do("zrevrange",key,0,19))
 
 	return words
 }

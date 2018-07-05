@@ -33,14 +33,14 @@ func List(context *gin.Context){
 	offset := (page-1) * pagesize
 	tp := context.Param("type")			//类型 time_d,size_d,rala_d
 
-	if !ltools.InArray(tp,[]string{"time_d","size_d"}){
+	if !ltools.InArray(tp,[]string{"time_d","size_d","hot_d"}){
 		tp = "time_d"
 	}
 
 	if words == ""{
 		context.HTML(http.StatusOK,"index.html",nil)
 	}else{
-		recordList := models.Search(words,"time_d",page,offset,pagesize)
+		recordList := models.Search(words,tp,page,offset,pagesize)
 		var prev,next int
 		if page > 1{
 			prev = page -1
@@ -55,6 +55,7 @@ func List(context *gin.Context){
 			"page":page,
 			"prev":prev,
 			"next":next,
+			"tp":tp,
 		})
 	}
 
@@ -65,7 +66,6 @@ func List(context *gin.Context){
  */
 func Info(context *gin.Context){
 	code := context.Param("code")
-	fmt.Println("1:",code)
 	if code == ""{
 		//跳转到错误页面
 		return
@@ -77,7 +77,11 @@ func Info(context *gin.Context){
 		//没有找到资源，错误提示
 		return
 	}
+
+	justWords := models.GetJustSearch()
+
 	context.HTML(http.StatusOK,"info.html",gin.H{
 		"record":record,
+		"justWords":justWords,
 	})
 }

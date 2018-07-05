@@ -4,7 +4,6 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"errors"
 	log "github.com/alecthomas/log4go"
-	"fmt"
 	"strings"
 	"html/template"
 )
@@ -29,7 +28,6 @@ func (this *Record) Load(code string)error{
 	exists, err := redis.Int(rcon.Do("EXISTS", key))
 	if err == nil && exists == 1 {
 		values, err := redis.Values(rcon.Do("HGETALL", key))
-		fmt.Println(values)
 		if err == nil {
 			if len(values) == 0 {
 				log.Error("record not exists!code:%s",code)
