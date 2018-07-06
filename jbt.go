@@ -35,7 +35,7 @@ func main(){
 
 	router := initRouter()
 
-	err = http.ListenAndServe(":9090", router)
+	err = http.ListenAndServe(models.AppPort, router)
 	if err != nil {
 		fmt.Printf("http.ListenAndServe has error:%v\n", err)
 		log.Error("http.ListenAndServe has error:%v\n", err)

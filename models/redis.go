@@ -18,7 +18,7 @@ var (
 func initRedisConfig() error {
 
 	rpasswd = lcf.String("redis::rpasswd")
-	if muser == "" {
+	if rpasswd == "" {
 		return errors.New("Can't not find redis parameters:rpasswd")
 	}
 	raddress = lcf.String("redis::raddress")

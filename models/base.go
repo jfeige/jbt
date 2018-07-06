@@ -1,7 +1,6 @@
 package models
 
 import (
-	"database/sql"
 	"errors"
 	"github.com/garyburd/redigo/redis"
 	"github.com/jfeige/lconfig"
@@ -19,18 +18,12 @@ var (
 )
 
 type connect struct {
-	db   *sql.DB
 	pool *redis.Pool
 }
 
 //读取配置文件，初始化数据库和redis连接池
 func InitBaseConfig(file string) error {
 	lcf, err = lconfig.NewConfig(file)
-	if err != nil {
-		return err
-	}
-	//mysql配置
-	err = initMysqlConfig()
 	if err != nil {
 		return err
 	}
@@ -46,11 +39,6 @@ func InitBaseConfig(file string) error {
 	}
 
 	conn = &connect{}
-	db, err := initMysql()
-	if err != nil {
-		return err
-	}
-	conn.db = db
 	conn.pool = initRedisPool()
 
 	return nil
@@ -61,13 +49,6 @@ func InitBaseConfig(file string) error {
 */
 func (this *connect) GetRedisConn() redis.Conn {
 	return this.pool.Get()
-}
-
-/**
-获取mysql连接
-*/
-func (this *connect) GetMysqlConn() *sql.DB {
-	return this.db
 }
 
 /**

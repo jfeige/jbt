@@ -22,7 +22,7 @@ func Index(context *gin.Context){
 
 //form提交搜索
 func List(context *gin.Context){
-	pagesize := 10
+	pagesize := models.BtPageSize
 	words := context.Param("words")		//搜索关键字
 	tmp_page := context.Param("page")		//页码
 
