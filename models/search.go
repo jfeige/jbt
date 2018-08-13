@@ -23,7 +23,6 @@ func Search(words,tp string,page,offset,pagesize int)[]*Record{
 	defer rcon.Close()
 	w := base64.StdEncoding.EncodeToString([]byte(words))
 	key := "list:" + w + ":" + tp
-	log.Info("search key:===============",key)
 	ret := make([]*Record,0)
 
 	result,err := redis.Strings(rcon.Do("ZREVRANGE",key,offset,(offset + pagesize-1)))
